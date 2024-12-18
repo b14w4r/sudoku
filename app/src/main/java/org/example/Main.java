@@ -4,28 +4,12 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class main {
+public class Main {
 
   public static void main(String[] args) {
     cleanMaker();
-    // boolean unfinished = true;
-    // while (unfinished) {
-    // int[][] finalFullSud = sud();
-    // int errors = 0;
-    // for (int i = 0; i < 9; i++) {
-    // for (int j = 0; j < 9; j++) {
-    // if (finalFullSud[i][j] == 0) {
-    // errors++;
-    // }
-    // }
-    // }
-    // if (errors == 0) {
-    // unfinished = false;
-    // for (int i = 0; i < finalFullSud.length; i++) {
-    // System.out.println(Arrays.toString(finalFullSud[i]));
-    // }
-    // }
-    // }
+    System.out.println("-------------------------------------------");
+    bigShuffler(cleanMaker());
   }
 
   public static int[][] cleanMaker() {
@@ -43,9 +27,9 @@ public class main {
       }
       if (errors == 0) {
         unfinished = false;
-        for (int i = 0; i < cleanSudoku.length; i++) {
-          System.out.println(Arrays.toString(cleanSudoku[i]));
-        }
+        // for (int i = 0; i < cleanSudoku.length; i++) {
+        //   System.out.println(Arrays.toString(cleanSudoku[i]));
+        // }
         // return cleanSudoku;
       }
     }
@@ -96,5 +80,32 @@ public class main {
       }
     }
     return true;
+  }
+
+  public static int[][] bigShuffler(int[][] oldSudoku) {
+    Random rnd = new Random();
+    int[][] newSudoku = oldSudoku;
+    System.out.println(newSudoku.length);
+    for (int i = 0; i < 9; i++) {
+      int row_buffer = rnd.nextInt(9);
+      int column_buffer = rnd.nextInt(9);
+      if (newSudoku[row_buffer][i] != 0) {
+        newSudoku[row_buffer][i] = 0;
+      }
+      if (newSudoku[i][column_buffer] != 0) {
+        newSudoku[i][column_buffer] = 0;
+      }
+    }
+    // for (int k = 3 * (row / 3); k < (3 * (row / 3) + 3); k++) {
+    // for (int j = 3 * (column / 3); j < (3 * (column / 3)) + 3; j++) {
+    // if (oldSudoku[k][j] == num) {
+    // return false;
+    // }
+    // }
+    // }
+    for (int i = 0; i < newSudoku.length; i++) {
+      System.out.println(Arrays.toString(newSudoku[i]));
+    }
+    return newSudoku;
   }
 }
